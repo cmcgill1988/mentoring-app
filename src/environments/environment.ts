@@ -6,6 +6,11 @@ export const environment = {
   production: false
 };
 
+export const actionCodeSettings = {
+  url: 'http://localhost:4200',
+  handleCodeInApp: true,
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

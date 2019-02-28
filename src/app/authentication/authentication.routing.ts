@@ -1,4 +1,3 @@
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -8,7 +7,6 @@ import { ModuleWithProviders } from '@angular/core';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'forgot', component: ForgotPasswordComponent },
   { path: 'profile', component: UserProfileComponent },
 ];
 
