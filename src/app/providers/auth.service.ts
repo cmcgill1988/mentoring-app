@@ -16,24 +16,15 @@ export class AuthService {
         this.user$.subscribe((response) => this.loginStateChange$.emit(response));
     }
 
-    login(credentials: UserCredentials) {
-        const promise = new Promise((resolve, reject) => {
-            this.afireauth.auth.signInWithEmailAndPassword(credentials.email, credentials.password).then(() => {
-                resolve(true);
-            }).catch((err) => {
-                reject(err);
-            });
-        });
-        return promise;
+    public async login(credentials: UserCredentials): Promise<void> {
+      await this.afireauth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
     }
 
-    logout() {
-        const promise = new Promise((resolve, reject) => {
-            this.afireauth.auth.signOut().then(() => {
-                resolve(true);
-            }).catch((err) => reject(err));
-        });
-        return promise;
+    public async logout(): Promise<void> {
+      try {
+        await this.afireauth.auth.signOut();
+      } catch (error) {
+        console.error(error);
+      }
     }
-
 }

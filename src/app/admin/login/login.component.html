@@ -1,56 +1,28 @@
-<div class="container-fluid" @fade enterSubmit (enterPressed)="signIn()">
-  <div class="col-xs-12 full-center">
-    <div class="d-none d-lg-block full-center">
-      <div class="card text-white bg-dark mb-3 full-center" style="width:50vw;">
-        <div>
-          <h3>Login</h3>
+<div class="container bg-faded align-items-center align-middle">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Log in to continue</h5>
+      <form [formGroup]="signInForm" (submit)="login()">
+        <div class="row">
+          <input type="email" formControlName="email" class="form-control" placeholder="Email Address"
+            aria-label="Email Address">
         </div>
-        <div class="card-block">
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="credentials.email" aria-describedby="basic-addon1">
-          </div>
-          <div style="height: 10px;"></div>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon2">Password</span>
-            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="credentials.password" aria-describedby="basic-addon2">
-          </div>
-          <div style="height: 10px;"></div>
-          <button class="btn btn-success btn-lg" (click)="signIn()">Login</button>
-          <div style="height: 10px;"></div>
-          <a routerLink="/forgot-password">Forgot login details ?
-            <b> Get Help </b>
-          </a>
-          <div style="height: 10px;"></div>
-          <a routerLink="/sign-up">Don't have an account? Sign up</a>
+        <div class="row">
+          <input type="password" formControlName="password" class="form-control" placeholder="Password"
+            aria-label="Password">
         </div>
-      </div>
-    </div>
-    <div class="d-lg-none">
-      <div class="card text-white bg-dark mb-3 full-center" style="width:100vw;">
-        <div>
-          <h3>Login</h3>
+        <div class="row">
+          <button type="submit" class="btn btn-success btn-block" (click)="login()"
+            [disabled]="!signInForm.valid || isLoggingIn">Login</button>
         </div>
-        <div class="card-block">
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="credentials.email" aria-describedby="basic-addon1">
-          </div>
-          <div style="height: 10px;"></div>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon2">Password</span>
-            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="credentials.password" aria-describedby="basic-addon2">
-          </div>
-          <div style="height: 10px;"></div>
-          <button class="btn btn-success btn-lg" (click)="signIn()">Login</button>
-          <div style="height: 10px;"></div>
-          <a routerLink="/forgot-password">Forgot login details ?
-            <b> Get Help </b>
-          </a>
-          <div style="height: 10px;"></div>
-          <a routerLink="/sign-up">Don't have an account? Sign up</a>
+        <div class="row">
+          <button class="btn btn-link btn-block" [routerLink]="['forgot-password']">Having trouble logging in? Get help</button>
         </div>
-      </div>
+        <div class="row">
+          <button class="btn btn-link btn-block" [routerLink]="['sign-up']">Don't have an account? Click
+            here to sign up</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

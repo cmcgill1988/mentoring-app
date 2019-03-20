@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { promise } from 'protractor';
 
 @Component({
   selector: 'app-login',

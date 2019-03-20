@@ -8,9 +8,10 @@ import { BlogPageComponent } from './blog-page/blog-page.component';
 import { CanvasPageComponent } from './canvas-page/canvas-page.component';
 import { SharedComponentModule } from '../shared-component/shared-component.module';
 import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
-  declarations: [HomePageComponent, SecurePageComponent, AboutPageComponent, BlogPageComponent, CanvasPageComponent],
+  declarations: [HomePageComponent, SecurePageComponent, AboutPageComponent, BlogPageComponent, CanvasPageComponent, ErrorPageComponent],
   imports: [
     CommonModule,
     pageRouting,

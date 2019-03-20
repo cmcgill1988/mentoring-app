@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig } from '@angular/platform-browser';
 import { CoreModule } from './core/core.module';
 import { FIRESTORE_CONFIG } from './firestore.config';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +18,10 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
 import { SharedDirectivesModule } from './shared-directives/shared-directives.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminModule } from './admin/admin.module';
+import { AuthService } from './providers/auth.service';
+import { LikesService } from './providers/likes.service';
+import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToasterModule } from 'angular2-toaster';
 
 
 @NgModule({
@@ -42,11 +46,12 @@ import { AdminModule } from './admin/admin.module';
     ReactiveFormsModule,
     SharedComponentModule,
     SharedDirectivesModule,
+    ToasterModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center',
     }),
   ],
-  providers: [],
+  providers: [AuthService, LikesService, NgbDropdownConfig, HammerGestureConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

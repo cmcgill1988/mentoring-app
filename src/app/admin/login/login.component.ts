@@ -6,6 +6,7 @@ import { ToasterService } from 'angular2-toaster';
 import { AuthService } from '../../providers/auth.service';
 import { UserCredentials } from '../../data/interfaces/usercredentials';
 import { fadeAnimation } from '../../_animations/fade.animation';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -14,28 +15,31 @@ import { fadeAnimation } from '../../_animations/fade.animation';
   animations: [fadeAnimation]
 })
 export class LoginComponent implements OnInit {
-  credentials = {} as UserCredentials;
+  public signInForm: FormGroup;
+  public isLoggingIn: boolean;
+  constructor(public authService: AuthService, private fb: FormBuilder, public router: Router, private toasterService: ToasterService) {}
 
-  constructor(public authService: AuthService, public router: Router, private toasterService: ToasterService) { }
-
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.signInForm = this.fb.group({
+      email: [null, Validators.compose([Validators.required, Validators.email])],
+      password: [null, Validators.compose([Validators.required])],
+    });
   }
 
-  signIn() {
-    if (!this.credentials.email || !this.credentials.password) {
-      this.toasterService.pop('error', 'Error', 'Please enter both your email and password.');
-    } else {
-      this.authService.login(this.credentials).then((res: any) => {
-        if (!res.code) {
-          this.router.navigate(['/']);
-          this.toasterService.pop('success', 'Success', 'Login Successful');
-        } else {
-          alert(res);
-          this.toasterService.pop('error', 'Error', 'Login failed');
-        }
-      }).catch((err) => {
-        this.toasterService.pop('error', 'Error', err);
-      });
+  public async login(): Promise<void> {
+    console.log('LOGGING IN');
+    if (!this.isLoggingIn) {
+      this.isLoggingIn = true;
+      try {
+        await this.authService.login(this.signInForm.value as UserCredentials);
+        this.toasterService.pop('success', 'Success', 'Login Successful');
+        this.isLoggingIn = false;
+        this.router.navigate(['/home']);
+      } catch (error) {
+        this.isLoggingIn = false;
+        console.log(error);
+        this.toasterService.pop('error', 'Error', 'Login failed');
+      }
     }
   }
 }
