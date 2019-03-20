@@ -1,0 +1,28 @@
+<div class="container scroll-content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card" @fade>
+        <img class="header-image card-img-top" *ngIf="content?.imgURL" [src]="content?.imgURL" alt="Card image cap">
+        <div class="main-content card-block">
+          <h4 class="card-title">{{content?.title}}</h4>
+          <h6 class="card-subtitle mb-2 text-muted full-center pull-left" style="padding:1vh;">
+            <user-display class="full-center pull-left" avatarSize="lg" [uid]="content?.author"></user-display>
+          </h6>
+            <div class="card-text" [innerHtml]="content.text"></div>
+        </div>
+        <div class="card-footer text-muted" *ngIf="currentUser">
+          <button class="btn btn-link" *ngIf="!hasLiked(content?.$key, currentUser?.uid)" (click)="addLike(content.likes, content.$key, currentUser.uid)">
+            <i class="fa fa-thumbs-up"></i>&nbsp;{{content?.likes}}
+          </button>
+          <button class="btn btn-link" *ngIf="hasLiked(content?.$key, currentUser?.uid)" (click)="removeLike(content.likes, content.$key, currentUser.uid)">
+            <i class="fa fa-thumbs-up"></i>&nbsp;{{content?.likes}}
+          </button>
+          <button class="btn btn-link" (click)="content.showComments = !content.showComments">
+            <i class="fa fa-comment"></i>&nbsp;{{content?.comments}}
+          </button>
+          <comment-list *ngIf="content?.showComments" [parent]="content?.$key" commentNode="content?.commentNode"></comment-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

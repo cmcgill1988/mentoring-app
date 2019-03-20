@@ -1,0 +1,27 @@
+<div class="card" @fade>
+  <div class="card-header">
+    <user-display class="full-center pull-left" avatarSize="xs" [uid]="item?.author"></user-display>
+    <card-item-post-controls *ngIf="currentUser?.uid" [postAuthor]="itme?.author" [uid]="currentUser?.uid" [postId]="item?.id"></card-item-post-controls>
+  </div>
+  <img class="card-img-top" noImageSaving src="{{item?.imgUrl}}" *ngIf="item?.imgUrl !== null" alt="Card image cap">
+  <div class="card-block" *ngIf="item?.title||item?.summary">
+    <h4 class="card-title" *ngIf="item?.title">{{item?.title}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted" *ngIf="item?.title">{{item?.dateAdded | date:'MMM dd yyyy HH:mm'}}</h6>
+    <p class="card-text" *ngIf="item?.summary">{{item?.summary}}</p>
+    <!-- <p *ngIf="hasLiked(item?.$key, currentUser?.uid)" [@fadeAnimation]>
+      <i class="fa fa-thumbs-up fa-2x text-primary"></i>
+    </p> -->
+  </div>
+  <div class="card-footer text-muted" *ngIf="currentUser">
+    <!-- <button class="btn btn-link" *ngIf="!hasLiked(item?.$key, currentUser?.uid)" (click)="addLike(item.likes, item.author, item.$key, currentUser.uid)">
+      <i class="fa fa-thumbs-up"></i>&nbsp;{{item?.likes}}
+    </button>
+    <button class="btn btn-link" *ngIf="hasLiked(item?.$key, currentUser?.uid)" (click)="removeLike(item.likes, item.author, item.$key, currentUser.uid)">
+      <i class="fa fa-thumbs-up"></i>&nbsp;{{item?.likes}}
+    </button> -->
+    <button class="btn btn-link" (click)="item.showComments = !item.showComments">
+      <i class="fa fa-comment"></i>&nbsp;{{item?.comments}}
+    </button>
+    <comment-list *ngIf="item.showComments" [parent]="item" commentNode="blog"></comment-list>
+  </div>
+</div>

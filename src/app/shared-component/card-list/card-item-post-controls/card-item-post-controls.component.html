@@ -1,0 +1,17 @@
+<form class="form-inline">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown bk-dark" ngbDropdown placement="bottom">
+      <a class="nav-link dropdown-toggle full-center" id="postControlDropDown" ngbDropdownToggle>
+        <span class="icon-bar">
+          <i class="fa fa-ellipsis-v fa-2x"></i>
+        </span>
+      </a>
+      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="postControlDropDown">
+        <a class="dropdown-item" (click)="removePost()">
+          <span class="icon-bar">
+            <i class="fa fa-close fa-2x text-danger"></i>
+          </span>&nbsp; Delete</a>
+      </div>
+    </li>
+  </ul>
+</form>

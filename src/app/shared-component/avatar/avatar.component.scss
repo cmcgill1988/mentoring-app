@@ -1,0 +1,41 @@
+.avatar-wrapper {
+  border-radius: 50%;
+  background: #fff;
+  background-size: cover;
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  border: 1px solid #333;
+}
+
+.avatar-img-xxs {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+
+.avatar-img-xs {
+  height: 3rem;
+  width: 3rem;
+}
+
+.avatar-img-sm {
+  height: 6rem;
+  width: 6rem;
+}
+
+.avatar-img-md {
+  height: 10rem;
+  width: 10rem;
+}
+
+.avatar-img-lg {
+  height: 14rem;
+  width: 14rem;
+}
+
+.avatar-img-xl {
+  height: 18rem;
+  width: 18rem;
+}

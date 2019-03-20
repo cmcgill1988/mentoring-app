@@ -1,0 +1,24 @@
+<div class="list-wrapper">
+  <div *ngFor="let comment of comments | async">
+    <div class="row" @fade>
+      <div class="col-xs-2">
+        <div class="full-center">
+          <user-display class="full-center" avatarSize="xs" [uid]="comment?.author"></user-display>
+        </div>
+      </div>
+      <div class="col-xs-9">
+        <div [ngClass]="{
+          'bubble-left':comment?.author === currentUser?.uid,
+          'bubble-right':comment?.author != currentUser?.uid
+        }">
+          <div>
+            <p>{{comment?.content}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="currentUser?.uid">
+  <comment [parent]="parent" [commentNode]="commentNode"></comment>
+</div>

@@ -1,0 +1,20 @@
+<div *ngIf="currentUpload">
+  <progress class="progress is-success" min=1 max=100 value="{{ currentUpload?.progress }}" style="width:100%;"></progress>
+  Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+</div>
+<div class="dropzone hidden-sm hidden-md hidden-xs" fileDrop (filesDropped)="handleDrop($event)" (filesHovered)="dropZoneState($event)"
+  [ngClass]="{'dropZoneActive': dropZoneActive}">
+  <div class="text-wrapper centered">
+    <div class="centered">
+      <i class="fa fa-cloud-upload fa-4x"></i>
+      <h2>Drag image(s) to upload</h2>
+    </div>
+  </div>
+</div>
+
+<div class="full-center">
+  <label class="custom-file hidden-lg hidden-xl">
+    <input type="file" id="file" class="custom-file-input" (change)="detectFiles($event)">
+    <span class="custom-file-control"></span>
+  </label>
+</div>

@@ -1,0 +1,83 @@
+.container-fluid {
+  margin-bottom: 1vh;
+}
+
+a {
+  color: #9d9d9d;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:active {
+  color: #fff;
+}
+
+a:hover {
+  color: #fff;
+}
+
+.fa {
+  font-size: 28px;
+  margin-right: 0.25vw;
+}
+
+#navbar {
+  padding-top: 0.5vh;
+  font-family: 'bebasregular';
+  font-size: 18px;
+}
+
+.dropdown-menu {
+  background-color: #343a40;
+  width:100%;
+}
+
+.dropdown-menu a {
+  color: #9d9d9d;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-menu a:hover {
+  color: #fff;
+}
+
+.dropdown-item:hover{
+  background-color: #343a40;
+}
+
+
+/* SMARTPHONES PORTRAIT */
+
+@media only screen and (min-width: 300px) {
+  .img-responsive {
+    max-width: 8vw;
+  }
+}
+
+
+/* SMARTPHONES LANDSCAPE */
+
+@media only screen and (min-width: 480px) {
+  .img-responsive {
+    max-width: 4.5vw;
+  }
+}
+
+
+/* TABLETS PORTRAIT */
+
+@media only screen and (min-width: 768px) {
+  .img-responsive {
+    max-width: 4.5vw;
+  }
+}
+
+
+/* TABLET LANDSCAPE / DESKTOP */
+
+@media only screen and (min-width: 1024px) {
+  .img-responsive {
+    max-height: 4.5vh;
+  }
+}

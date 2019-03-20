@@ -1,0 +1,100 @@
+<div class="container" enterSubmit (enterPressed)="signUp()">
+  <div class="row">
+    <div class="col-xs-12 full-center" style="height:80vh">
+      <div class="d-none d-lg-block full-center">
+        <div class="card text-white bg-dark mb-3 full-center" style="width:30vw;">
+          <div>
+            <h3>Sign Up</h3>
+          </div>
+          <div class="card-block">
+            <div class="input-group">
+              <span class="input-group-addon">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newUser.email">
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="input-group">
+              <span class="input-group-addon">Display Name</span>
+              <input type="text" class="form-control" placeholder="Display Name" [(ngModel)]="newUser.displayName">
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="input-group">
+              <span class="input-group-addon">Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <input type="password" class="form-control" placeholder="Password" [(ngModel)]="newUser.password">
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="password-warning" *ngIf="!strongPassword(newUser.password) && newUser.password.length > 0" [@fadeAnimation]>
+              <p>A password should contain:</p>
+              <ul>
+                <li>
+                  At least one upper case character.
+                </li>
+                <li>
+                  At least one lower case character.
+                </li>
+                <li>
+                  At least one number.
+                </li>
+
+                <li>
+                  At least one special character.
+                </li>
+              </ul>
+            </div>
+            <div style="height: 10px;"></div>
+            <button class="btn btn-success btn-lg" (click)="signUp()">Sign Up</button>
+            <div style="height: 10px;"></div>
+            <a routerLink="/login">Go Back</a>
+          </div>
+        </div>
+      </div>
+      <div class="d-lg-none">
+        <div class="full-center">
+          <div class="card text-white bg-dark mb-3 full-center">
+            <div>
+              <h3>Sign Up</h3>
+            </div>
+            <div class="card-block">
+              <div class="input-group">
+                <span class="input-group-addon">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newUser.email">
+              </div>
+              <div style="height: 10px;"></div>
+              <div class="input-group">
+                <span class="input-group-addon">Display Name</span>
+                <input type="text" class="form-control" placeholder="Display Name" [(ngModel)]="newUser.displayName">
+              </div>
+              <div style="height: 10px;"></div>
+              <div class="input-group">
+                <span class="input-group-addon">Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="newUser.password">
+              </div>
+              <div style="height: 10px;"></div>
+              <div class="password-warning" *ngIf="!strongPassword(newUser.password) && newUser.password.length > 0" [@fadeAnimation]>
+                <p>A password should contain:</p>
+                <ul>
+                  <li>
+                    At least one upper case character.
+                  </li>
+                  <li>
+                    At least one lower case character.
+                  </li>
+                  <li>
+                    At least one number.
+                  </li>
+
+                  <li>
+                    At least one special character.
+                  </li>
+                </ul>
+              </div>
+              <div style="height: 10px;"></div>
+              <button class="btn btn-success btn-lg" (click)="signUp()">Sign Up</button>
+              <div style="height: 10px;"></div>
+              <a routerLink="/login">Go Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

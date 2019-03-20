@@ -1,0 +1,7 @@
+<div class="input-group" enterSubmit (enterPressed)="saveComment(comment, parent.comments)">
+  <textarea class="form-control" [(ngModel)]="comment.content" placeholder="Leave a comment..." aria-describedby="basic-addon1"
+    style="height:10vh;"></textarea>
+  <span class="input-group-addon" id="basic-addon1">
+    <button class="btn btn-link" (click)="saveComment(comment, parent.comments)">Comment</button>
+  </span>
+</div>

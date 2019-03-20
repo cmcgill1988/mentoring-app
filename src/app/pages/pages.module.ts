@@ -3,12 +3,19 @@ import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page/home-page.component';
 import { pageRouting } from './pages.routing';
 import { SecurePageComponent } from './secure-page/secure-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
+import { CanvasPageComponent } from './canvas-page/canvas-page.component';
+import { SharedComponentModule } from '../shared-component/shared-component.module';
+import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 
 @NgModule({
-  declarations: [HomePageComponent, SecurePageComponent],
+  declarations: [HomePageComponent, SecurePageComponent, AboutPageComponent, BlogPageComponent, CanvasPageComponent],
   imports: [
     CommonModule,
-    pageRouting
+    pageRouting,
+    SharedComponentModule,
+    SharedDirectivesModule
   ],
   exports: [HomePageComponent]
 })

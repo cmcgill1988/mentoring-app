@@ -1,0 +1,14 @@
+<div class="fixed-top">
+  <div class="card">
+    <div class="card-header">
+      <div class="pull-left">
+        <input type="text" class="form-control" #search placeholder="Search.." (keyup)="filterItems(search.value)" aria-describedby="basic-addon1"
+          style="width:45vw;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row full-center" *ngIf="currentUser?.uid">
+    <card-item  *ngFor="let item of filteredItems" [item]="item" [currentUser]="currentUser.uid" [originNode]="originNode"></card-item>
+</div>

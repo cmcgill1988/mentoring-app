@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="full-center">
+      <div class="card text-white bg-dark mb-3">
+        <div class="full-center">
+          <div class="card-title">
+            <h3>Profile</h3>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="full-center">
+            <avatar [avatar]="user?.photoURL || 'https://firebasestorage.googleapis.com/v0/b/ng4-template-9fbe1.appspot.com/o/app-assets%2Fplaceholder-thumb.svg?alt=media&token=f4a0883c-b712-4225-bf6e-fe68e1859a87'" size="xl" (click)="editImage('profile-pic-upload')"></avatar>
+          </div>
+          <div class="full-center">
+            <h2 *ngIf="user">
+              <input name="date" type="text" [(ngModel)]="user.displayName" (focusout)="editName(user.displayName)">
+            </h2>
+          </div>
+          <div class="full-center">
+            Tap on your picture or display name to change it.
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<modal id="profile-pic-upload">
+  <div class="col-xs-12">
+    <div class="modal">
+      <div class="modal-body">
+        <div class="card text-white bg-dark mb-3">
+          <div class="full-center">
+            <div class="card-title">
+              <h3>Upload a profile picture</h3>
+            </div>
+          </div>
+          <upload-form uploadType="profile" (uploadDone)="uploadDone($event)"></upload-form>
+          <div>&nbsp;</div>
+          <div class="card-footer">
+            <button class="btn btn-primary pull-right" (click)="closeModal('profile-pic-upload');">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>

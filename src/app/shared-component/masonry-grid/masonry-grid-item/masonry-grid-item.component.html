@@ -1,0 +1,32 @@
+<div *ngIf="itemType === 'full'" class="card" hover-lift>
+  <img noImageSaving *ngIf="item?.photoUrl" class="card-img-top img-fluid" [src]="item?.photoUrl">
+  <div class="card-block">
+    <h4 class="card-title">{{item?.title}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">{{item?.dateAdded | date:'medium'}}</h6>
+    <p class="card-text truncate">{{item?.summary}}</p>
+  </div>
+  <div class="card-footer">
+    <user-display class="full-center" avatarSize="xxs" [uid]="item?.author"></user-display>
+  </div>
+</div>
+<div *ngIf="itemType === 'image' && item?.photoUrl" class="card" hover-lift>
+  <div class="hovereffect">
+    <img noImageSaving class="card-img img-fluid" [src]="item?.photoUrl">
+    <div class="overlay">
+      <h3>{{item?.title}}</h3>
+      <p class="info truncate">{{item?.summary}}</p>
+      <user-display class="full-center" avatarSize="xxs" [uid]="item?.author"></user-display>
+      <h3 class="full-center">{{item?.dateAdded | date:'medium'}}</h3>
+    </div>
+  </div>
+</div>
+<div *ngIf="itemType === 'small-image' && item?.photoUrl" class="card" hover-lift>
+  <div class="hovereffect">
+    <img noImageSaving class="card-img img-fluid" [src]="item?.photoUrl">
+    <div class="overlay">
+      <user-display class="full-center" avatarSize="xxs" [uid]="item?.author"></user-display>
+      <h3 class="card-title">{{item?.title}}</h3>
+      <h3 class="full-center">{{item?.dateAdded | date:'medium'}}</h3>
+    </div>
+  </div>
+</div>
