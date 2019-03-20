@@ -52,7 +52,8 @@ export class UploadService {
     } catch (error) {
       console.error(error);
     } finally {
-      upload.url = uploadTask.snapshot.downloadURL;
+      const fileStorageRef = storageRef.child(`profiles/${this.af.auth.currentUser.uid}/${this.af.auth.currentUser.uid}`);
+      upload.url = await fileStorageRef.getDownloadURL();
       upload.name = upload.file.name;
       await this.saveFileData(upload);
       await this.userService.updateImage(upload.url);
@@ -76,7 +77,7 @@ export class UploadService {
     try {
       await this.afs.collection('uploads').add({ name: upload.name, url: upload.url, uid: this.af.auth.currentUser.uid });
     } catch (error) {
-      console.error(error);
+      console.error('Saving File Data to firestore', error);
     }
   }
 }

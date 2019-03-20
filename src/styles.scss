@@ -1,6 +1,109 @@
 @import '~ngx-toastr/toastr.css';
+@import "~bootstrap/scss/bootstrap-grid.scss";
 
 /* You can add global styles to this file, and also import other style files */
+
+.card-columns {
+  @include media-breakpoint-only(xs) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(sm) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(md) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(lg) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 3;
+  }
+}
+
 body {
   background: #7f8fa6;
+}
+
+.full-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.header-image {
+  height: 20vw;
+  display: inline-block;
+}
+
+.hvr-float {
+  display: block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.hvr-float:hover,
+.hvr-float:focus,
+.hvr-float:active {
+  -webkit-transform: translateY(-5%);
+  transform: translateY(-5%);
+  border: 2px solid rgba(0,0,0,0.5);
+}
+
+.main-content {
+  position: relative;
+}
+
+.modal-open .modal {
+  display: unset;
+}
+
+modal-window {
+  display: none;
+}
+
+modal-window .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+}
+
+modal-window .modal .modal-body {
+  padding: 20px;
+  margin: 40px;
+}
+
+modal-window .modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.75;
+  z-index: 900;
+}
+
+body .modal-open {
+  overflow: hidden;
 }

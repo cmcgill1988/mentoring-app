@@ -9,11 +9,11 @@ export const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: '', redirectTo: 'admin-login', pathMatch: 'full' },
-      { path: 'admin-login', component: LoginComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotComponent },
       { path: 'sign-up', component: SignupComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile/:uid', component: ProfileComponent },
     ]
   }
 ];

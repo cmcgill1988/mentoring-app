@@ -5,6 +5,9 @@ import { ToasterService } from 'angular2-toaster';
 import { UserService } from '../../providers/user.service';
 import { fadeAnimation } from '../../_animations/fade.animation';
 import { AuthService } from '../../providers/auth.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+export const strongPassRegex: RegExp = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
 
 @Component({
   selector: 'app-signup',
@@ -13,41 +16,42 @@ import { AuthService } from '../../providers/auth.service';
   providers: [UserService, AuthService],
   animations: [fadeAnimation]
 })
-export class SignupComponent {
-  public newUser = {
-    email: '',
-    password: '',
-    displayName: ''
-  };
+export class SignupComponent implements OnInit {
+  public registrationForm: FormGroup;
+  public isSignedUp: boolean = false;
+  constructor(
+    public auth: AuthService,
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: UserService,
+    private toasterService: ToasterService) { }
 
-  public isStrongPass: Boolean = false;
+  public ngOnInit(): void {
+    this.registrationForm = this.fb.group({
+      email: [null, Validators.compose([Validators.required, Validators.email])],
+      password: [null, Validators.compose([Validators.required, Validators.pattern(strongPassRegex)])],
+      displayName: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
+    });
+  }
 
-  constructor(public auth: AuthService, public router: Router, public userService: UserService, private toasterService: ToasterService) { }
-
-  public signUp() {
-    if (!this.newUser.email || !this.newUser.password || !this.newUser.displayName) {
-      this.toasterService.pop('error', 'Error', 'All fields are required. Display Name can be changed after login.');
-    } else if (!this.strongPassword(this.newUser.password)) {
-      this.toasterService.pop('error', 'Error', 'Password is not strong enough.');
-    } else {
-      this.userService.addUser(this.newUser).then((res: any) => {
-        if (res.success) {
-          this.auth.user$.subscribe((response) => {
-            const currentUser = response;
-            this.router.navigate(['/profile', currentUser.uid]);
-          });
-        } else {
-          this.toasterService.pop('error', 'Error', res);
+  public async signUp(): Promise<void> {
+    try {
+      await this.userService.addUser(this.registrationForm.value);
+      this.auth.user$.subscribe((response) => {
+        if (response.uid) {
+          this.router.navigate(['/admin/profile', response.uid]);
         }
       });
+      this.isSignedUp = true;
+    } catch (error) {
+      this.isSignedUp = false;
+      this.toasterService.pop('error', 'Error', 'Sign up failed please try again');
+      console.error(error);
     }
   }
 
-  private strongPassword(pass: string) {
-    const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
-    if (strongRegex.test(pass)) {
-      this.isStrongPass = true;
-    }
-    return this.isStrongPass;
+  public shouldDisplayErrorMessage(controlName: string): boolean {
+    const control = this.registrationForm.get(controlName);
+    return !control.valid && control.dirty && control.value;
   }
 }

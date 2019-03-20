@@ -1,34 +1,20 @@
-<div class="container-fluid" @fade enterSubmit (enterPressed)="resetPassword()">
-  <div class="col-xs-12 full-center">
-    <div class="d-none d-lg-block full-center">
-      <div class="card text-white bg-dark mb-3 full-center" style="width:50vw;">
-        <div>
-          <h3>Reset Password</h3>
+<div class="container bg-faded align-items-center align-middle" @fade>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Enter your email to reset your password</h5>
+      <form [formGroup]="forgotPasswordForm" (submit)="resetPassword()">
+        <div class="row">
+          <input type="email" formControlName="email" class="form-control" placeholder="Email Address"
+            aria-label="Email Address">
         </div>
-        <div class="card-block">
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email" aria-describedby="basic-addon1">
-          </div>
-          <div style="height: 10px;"></div>
-          <button class="btn btn-success btn-lg" (click)="resetPassword()">Reset</button>
+        <div class="row">
+          <button type="submit" class="btn btn-success btn-block" (click)="resetPassword()"
+            [disabled]="!forgotPasswordForm.valid || emailSent">Reset your password</button>
         </div>
-      </div>
-    </div>
-    <div class="d-lg-none">
-      <div class="card text-white bg-dark mb-3 full-center" style="width:100vw;">
-        <div>
-          <h3>Reset Password</h3>
+        <div class="row">
+          <button class="btn btn-link btn-block" [routerLink]="['/admin']" routerLinkActive="active">Back</button>
         </div>
-        <div class="card-block">
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email" aria-describedby="basic-addon1">
-          </div>
-          <div style="height: 10px;"></div>
-          <button class="btn btn-success btn-lg" (click)="resetPassword()">Reset</button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

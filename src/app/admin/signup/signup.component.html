@@ -1,28 +1,36 @@
-<div class="container" enterSubmit (enterPressed)="signUp()">
-  <div class="row">
-    <div class="col-xs-12 full-center" style="height:80vh">
-      <div class="d-none d-lg-block full-center">
-        <div class="card text-white bg-dark mb-3 full-center" style="width:30vw;">
-          <div>
-            <h3>Sign Up</h3>
+<div class="container bg-faded align-items-center align-middle" @fade>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Complete the form to sign up</h5>
+      <form [formGroup]="registrationForm" (submit)="signUp()">
+        <div class="row">
+          <input type="email" formControlName="email" class="form-control" placeholder="Email Address"
+            aria-label="Email Address">
+        </div>
+        <div class="row">
+          <input type="password" formControlName="password" class="form-control" placeholder="Password"
+            aria-label="Password">
+        </div>
+        <div class="row">
+          <input type="text" formControlName="displayName" class="form-control" placeholder="Display Name"
+            aria-label="Display Name">
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn-success btn-block"
+            [disabled]="!registrationForm.valid || isSignedUp">Sign Up</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-link btn-block" [routerLink]="['/admin']">Back</button>
+        </div>
+
+        <div style="height: 10px;"></div>
+          <div class="password-warning" *ngIf="shouldDisplayErrorMessage('email')" @fade>
+            <p>A valid email must be provided</p>
           </div>
-          <div class="card-block">
-            <div class="input-group">
-              <span class="input-group-addon">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newUser.email">
-            </div>
-            <div style="height: 10px;"></div>
-            <div class="input-group">
-              <span class="input-group-addon">Display Name</span>
-              <input type="text" class="form-control" placeholder="Display Name" [(ngModel)]="newUser.displayName">
-            </div>
-            <div style="height: 10px;"></div>
-            <div class="input-group">
-              <span class="input-group-addon">Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <input type="password" class="form-control" placeholder="Password" [(ngModel)]="newUser.password">
-            </div>
-            <div style="height: 10px;"></div>
-            <div class="password-warning" *ngIf="!strongPassword(newUser.password) && newUser.password.length > 0" [@fadeAnimation]>
+          <div class="password-warning" *ngIf="shouldDisplayErrorMessage('displayName')" @fade>
+            <p>A display name should be at least 6 characters</p>
+          </div>
+          <div class="password-warning" *ngIf="shouldDisplayErrorMessage('password')" @fade>
               <p>A password should contain:</p>
               <ul>
                 <li>
@@ -34,67 +42,13 @@
                 <li>
                   At least one number.
                 </li>
-
+    
                 <li>
                   At least one special character.
                 </li>
               </ul>
             </div>
-            <div style="height: 10px;"></div>
-            <button class="btn btn-success btn-lg" (click)="signUp()">Sign Up</button>
-            <div style="height: 10px;"></div>
-            <a routerLink="/login">Go Back</a>
-          </div>
-        </div>
-      </div>
-      <div class="d-lg-none">
-        <div class="full-center">
-          <div class="card text-white bg-dark mb-3 full-center">
-            <div>
-              <h3>Sign Up</h3>
-            </div>
-            <div class="card-block">
-              <div class="input-group">
-                <span class="input-group-addon">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newUser.email">
-              </div>
-              <div style="height: 10px;"></div>
-              <div class="input-group">
-                <span class="input-group-addon">Display Name</span>
-                <input type="text" class="form-control" placeholder="Display Name" [(ngModel)]="newUser.displayName">
-              </div>
-              <div style="height: 10px;"></div>
-              <div class="input-group">
-                <span class="input-group-addon">Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="newUser.password">
-              </div>
-              <div style="height: 10px;"></div>
-              <div class="password-warning" *ngIf="!strongPassword(newUser.password) && newUser.password.length > 0" [@fadeAnimation]>
-                <p>A password should contain:</p>
-                <ul>
-                  <li>
-                    At least one upper case character.
-                  </li>
-                  <li>
-                    At least one lower case character.
-                  </li>
-                  <li>
-                    At least one number.
-                  </li>
-
-                  <li>
-                    At least one special character.
-                  </li>
-                </ul>
-              </div>
-              <div style="height: 10px;"></div>
-              <button class="btn btn-success btn-lg" (click)="signUp()">Sign Up</button>
-              <div style="height: 10px;"></div>
-              <a routerLink="/login">Go Back</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

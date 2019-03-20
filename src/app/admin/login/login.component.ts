@@ -20,6 +20,11 @@ export class LoginComponent implements OnInit {
   constructor(public authService: AuthService, private fb: FormBuilder, public router: Router, private toasterService: ToasterService) {}
 
   public ngOnInit(): void {
+    this.authService.user$.subscribe((user) => {
+      if (user) {
+        this.router.navigate(['/admin/profile', user.uid]);
+      }
+    });
     this.signInForm = this.fb.group({
       email: [null, Validators.compose([Validators.required, Validators.email])],
       password: [null, Validators.compose([Validators.required])],
@@ -27,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   public async login(): Promise<void> {
-    console.log('LOGGING IN');
     if (!this.isLoggingIn) {
       this.isLoggingIn = true;
       try {

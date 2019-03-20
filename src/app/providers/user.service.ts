@@ -54,23 +54,17 @@ export class UserService {
   }
 
   public async updateImage(imageUrl: string): Promise<any> {
-    const promise = new Promise((resolve, reject) => {
-      this.afireauth.auth.currentUser.updateProfile({
+    try {
+      await this.afireauth.auth.currentUser.updateProfile({
         displayName: this.afireauth.auth.currentUser.displayName,
         photoURL: imageUrl
-      }).then(() => {
-        this.afs.doc<User>(`users/${this.afireauth.auth.currentUser.uid}`).update({
-          photoURL: imageUrl
-        }).then(() => {
-          resolve({ success: true });
-        }).catch((err) => {
-          reject(err);
-        });
-      }).catch((err) => {
-        reject(err);
       });
-    });
-    return promise;
+      await  this.afs.doc<User>(`users/${this.afireauth.auth.currentUser.uid}`).update({
+        photoURL: imageUrl
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public async getSingleUserDetails(uid: string): Promise<any> {

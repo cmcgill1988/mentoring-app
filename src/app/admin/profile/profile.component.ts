@@ -66,11 +66,12 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  uploadDone(uploadArray: any[]) {
-    let uploadIdx = uploadArray.length - 1;
+  public uploadDone(uploadArray: any[]): void {
+    const uploadIdx = uploadArray.length - 1;
+    console.log('upload array', uploadArray[uploadIdx]);
     this.zoneService.run(() => {
       this.user.photoURL = uploadArray[uploadIdx].url;
-    })
+    });
     this.closeModal('profile-pic-upload');
   }
 }
