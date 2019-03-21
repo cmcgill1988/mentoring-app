@@ -29,7 +29,7 @@ export class ForgotComponent implements OnInit {
   }
   public async resetPassword(): Promise<void> {
     try {
-      await this.userService.passwordReset(this.forgotPasswordForm.value);
+      await this.userService.passwordReset(this.forgotPasswordForm.controls.email.value);
       this.toasterService.pop('success', 'Success', 'Check your email for a password reset email');
       this.emailSent = true;
     } catch (error) {
