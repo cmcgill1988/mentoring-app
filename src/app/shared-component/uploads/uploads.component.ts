@@ -19,7 +19,7 @@ export class UploadsComponent {
   public selectedFiles: FileList;
   constructor(private upSvc: UploadService) {
     this.dropZoneActive = false;
-   }
+  }
 
   public detectFiles(event): void {
     this.handleDrop(event.target.files);
@@ -32,30 +32,30 @@ export class UploadsComponent {
   public handleDrop(fileList: FileList): void {
     this.selectedFiles = fileList;
     const filesIndex = lo.range(fileList.length);
-    lo.each(filesIndex, (idx) => {
+    lo.each(filesIndex, async (idx) => {
       this.currentUpload = new Upload(fileList[idx]);
       switch (this.uploadType) {
         case 'profile':
-          this.upSvc.pushProfileUpload(this.currentUpload).then((response) => {
-            this.uploadList.push(response);
-            if (idx === fileList.length - 1) {
-              this.uploadDone.emit(this.uploadList);
-              this.currentUpload = undefined;
-            }
-          }).catch((error) => {
-            console.log(error);
-          });
+          await this.uploadHandler(this.upSvc.pushProfileUpload(this.currentUpload), idx);
           break;
         default:
-          this.upSvc.pushUpload(this.currentUpload).then((response) => {
-            this.uploadList.push(response);
-            if (idx === fileList.length - 1) {
-              this.uploadDone.emit(this.uploadList);
-            }
-          }).catch((error) => {
-            console.log(error);
-          });
+          await this.uploadHandler(this.upSvc.pushUpload(this.currentUpload), idx);
+          break;
       }
     });
+  }
+
+  private async uploadHandler(promise: Promise<Upload | void>, idx: number): Promise<void> {
+    try {
+      const uploadResponse = await promise;
+      console.log('uploadResponse', uploadResponse);
+
+      this.uploadList.push(uploadResponse);
+      if (idx === this.selectedFiles.length - 1) {
+        this.uploadDone.emit(this.uploadList[idx]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

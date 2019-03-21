@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 import { Upload } from '../../../data/models/upload';
 import { UserService } from '../../../providers/user.service';
 import 'firebase/storage';
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class UploadService {
@@ -36,13 +38,14 @@ export class UploadService {
     } catch (error) {
       console.error(error);
     } finally {
-      upload.url = uploadTask.snapshot.downloadURL;
+      const fileStorageRef = storageRef.child(`uploads/${this.af.auth.currentUser.uid}/${upload.file.name}_${dateIdent}`);
+      upload.url = await fileStorageRef.getDownloadURL();
       upload.name = upload.file.name;
       await this.saveFileData(upload);
     }
   }
 
-  public async pushProfileUpload(upload: Upload): Promise<void> {
+  public async pushProfileUpload(upload: Upload): Promise<Upload> {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`profiles/${this.af.auth.currentUser.uid}/${this.af.auth.currentUser.uid}`).put(upload.file);
     try {
@@ -57,9 +60,9 @@ export class UploadService {
       upload.name = upload.file.name;
       await this.saveFileData(upload);
       await this.userService.updateImage(upload.url);
+      return Observable.of(upload).toPromise();
     }
   }
-
 
   private deleteFileData(key: string) {
     return this.afs.collection('uploads').doc(key).delete();

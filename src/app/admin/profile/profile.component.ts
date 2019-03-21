@@ -9,6 +9,7 @@ import { UploadService } from '../../shared-component/uploads/services/upload.se
 import { UserService } from '../../providers/user.service';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import { Upload } from 'src/app/data/models/upload';
 
 
 @Component({
@@ -66,11 +67,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  public uploadDone(uploadArray: any[]): void {
-    const uploadIdx = uploadArray.length - 1;
-    console.log('upload array', uploadArray[uploadIdx]);
+  public uploadDone(upload: Upload): void {
     this.zoneService.run(() => {
-      this.user.photoURL = uploadArray[uploadIdx].url;
+      this.user.photoURL = upload.url;
     });
     this.closeModal('profile-pic-upload');
   }
