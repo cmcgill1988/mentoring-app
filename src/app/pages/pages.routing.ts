@@ -8,12 +8,13 @@ import { BlogPageComponent } from './blog-page/blog-page.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent },
-  { path: 'secure-page', component: SecurePageComponent },
-  { path: 'blog', component: BlogPageComponent },
-  { path: 'admin', loadChildren: '../admin/admin.module#AdminModule'},
-  { path: '**', component: ErrorPageComponent },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
+  { path: 'home', component: HomePageComponent, data: { animation: 'isRight' } },
+  { path: 'secure-page', component: SecurePageComponent, data: { animation: 'isLeft' } },
+  { path: 'blog', component: BlogPageComponent, data: { animation: 'isRight' } },
+  { path: 'login', component: LoginComponent, data: { animation: 'isRight' } },
+  { path: 'admin', loadChildren: '../admin/admin.module#AdminModule', data: { animation: 'isRight' }},
+  { path: '**', component: ErrorPageComponent, data: { animation: 'isLeft' } },
 ];
 
 export const pageRouting: ModuleWithProviders = RouterModule.forChild(routes);
