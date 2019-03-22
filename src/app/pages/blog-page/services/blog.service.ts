@@ -14,6 +14,7 @@ export class BlogService {
   }
 
   public async getUserBlogPosts(uid: string) {
+    console.log('UID', uid);
     const blogRef = await this.afs.collection<Post>('blog')
       .doc(uid)
       .collection('posts', ref => ref.where('author', '==', uid)

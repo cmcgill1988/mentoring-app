@@ -9,9 +9,17 @@ import { CanvasPageComponent } from './canvas-page/canvas-page.component';
 import { SharedComponentModule } from '../shared-component/shared-component.module';
 import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { MasonryPageComponent } from './masonry-page/masonry-page.component';
 
 @NgModule({
-  declarations: [HomePageComponent, SecurePageComponent, AboutPageComponent, BlogPageComponent, CanvasPageComponent, ErrorPageComponent],
+  declarations: [
+    HomePageComponent,
+    SecurePageComponent,
+    AboutPageComponent,
+    BlogPageComponent,
+    CanvasPageComponent,
+    MasonryPageComponent,
+    ErrorPageComponent],
   imports: [
     CommonModule,
     pageRouting,

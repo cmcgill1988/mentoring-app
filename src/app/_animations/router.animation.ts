@@ -1,37 +1,19 @@
-import { trigger, state, animate, transition, style, query, stagger, group, animateChild } from '@angular/animations';
-
+import { trigger, animate, transition, style, query, group, animateChild } from '@angular/animations';
+const optional = { optional: true };
 export const routerAnimation =
   trigger('routerAnimation', [
-    transition('* => isLeft', slideTo('left')),
-    transition('* => isRight', slideTo('right')),
-    transition('isRight => *', slideTo('left')),
-    transition('isLeft => *', slideTo('right'))
-  ]);
-
-function slideTo(direction) {
-  const optional = { optional: true };
-  return [
-    query(':enter, :leave', [
-      style({
-        position: 'absolute',
-        [direction]: 0,
-        top: 85,
-        width: '100%'
-      })
-    ], optional),
-    query(':enter', [
-      style({ [direction]: '-100%', opacity: 1 })
-    ]),
-    group([
-      query(':leave', [
-        animate('600ms ease', style({ [direction]: '100%', opacity: 0 }))
-      ], optional),
-      query(':enter', [
-        animate('600ms ease', style({ [direction]: '0%', opacity: 1 }))
+    transition('* <=> *', [
+      query(':enter, :leave', style({ position: 'absolute', left: '0%' }), optional),
+      query(':enter', style({ left: '100%' }), optional),
+      group([
+        query(':leave', group([
+          animateChild(),
+          animate('1200ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 0, left: '-100%' }))
+        ]), optional),
+        query(':enter', group([
+          animate('1200ms cubic-bezier(0.35, 0, 0.25, 1)', style('*')),
+          animateChild()
+        ]), { delay: 200, optional: true }),
       ])
-    ]),
-    // Normalize the page style... Might not be necessary
-    query(':leave', animateChild()),
-    query(':enter', animateChild()),
-  ];
-}
+    ])
+  ])

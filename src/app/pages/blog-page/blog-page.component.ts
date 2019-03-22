@@ -9,6 +9,7 @@ import { Post } from './../../data/models/post';
 import { UploadsComponent } from '../../shared-component/uploads/uploads.component';
 import { UploadService } from '../../shared-component/uploads/services/upload.service';
 import { UserDisplayComponent } from '../../shared-component/user-display/user-display.component';
+import { async } from '@angular/core/testing';
 
 @Component({
   templateUrl: './blog-page.component.html',
@@ -41,23 +42,24 @@ export class BlogPageComponent implements OnInit {
 
   public async ngOnInit(): Promise<void> {
     try {
-      const params = await this.route.params.toPromise;
-      const userBlogPosts = await this.blogService.getUserBlogPosts(params['uid']);
-      const remappedUserBlogPosts = userBlogPosts.map((item: any) => {
-        return {
-          id: item.id,
-          author: item.data.author,
-          comments: item.data.comments,
-          content: item.data.content,
-          dateAdded: item.data.dateAdded,
-          imgUrl: item.data.imgUrl,
-          likes: item.data.likes,
-          summary: item.data.summary,
-          timeStamp: item.data.timeStamp,
-          title: item.data.title,
-        };
+      this.route.params.subscribe(async (params) => {
+        const userBlogPosts = await this.blogService.getUserBlogPosts(params['uid']);
+        const remappedUserBlogPosts = userBlogPosts.map((item: any) => {
+          return {
+            id: item.id,
+            author: item.data.author,
+            comments: item.data.comments,
+            content: item.data.content,
+            dateAdded: item.data.dateAdded,
+            imgUrl: item.data.imgUrl,
+            likes: item.data.likes,
+            summary: item.data.summary,
+            timeStamp: item.data.timeStamp,
+            title: item.data.title,
+          };
+        });
+        this.posts = remappedUserBlogPosts;
       });
-      this.posts = remappedUserBlogPosts;
     } catch (error) {
       console.error(error);
     }
@@ -119,7 +121,7 @@ export class BlogPageComponent implements OnInit {
   }
 
   public uploadDone(uploadArray: any[]): void {
-    const  uploadIdx = uploadArray.length - 1;
+    const uploadIdx = uploadArray.length - 1;
     this.zoneService.run(() => {
       this.currentItem.imgUrl = uploadArray[uploadIdx].url;
     });
