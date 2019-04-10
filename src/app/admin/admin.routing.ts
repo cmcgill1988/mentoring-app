@@ -4,6 +4,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { ForgotComponent } from './forgot/forgot.component';
+import { AuthenticatedGuard } from '../route-guards/authenticated.guard';
 
 export const routes: Routes = [
   {
@@ -13,7 +14,7 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotComponent },
       { path: 'sign-up', component: SignupComponent },
-      { path: 'profile/:uid', component: ProfileComponent },
+      { path: 'profile/:uid', component: ProfileComponent, canActivate: [AuthenticatedGuard] },
     ]
   }
 ];

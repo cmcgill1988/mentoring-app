@@ -45,6 +45,12 @@
             <i class="fa fa-th"></i>
           </span>&nbsp;Secure</a>
       </li>
+      <li class="nav-link">
+        <a routerLink="admin-only" routerLinkActive="active">
+          <span class="icon-bar">
+            <i class="fa fa-th"></i>
+          </span>&nbsp;Admin</a>
+      </li>
     </ul>
     <form class="form-inline">
       <ul class="navbar-nav mr-auto">
@@ -54,7 +60,7 @@
             {{currentUser?.displayName}}
           </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/profile', currentUser.uid]" routerLinkActive="active">
+            <a class="dropdown-item" [routerLink]="['admin/profile', currentUser.uid]" routerLinkActive="active">
               <span class="icon-bar">
                 <i class="fa fa-user-circle"></i>
               </span>&nbsp; Profile</a>

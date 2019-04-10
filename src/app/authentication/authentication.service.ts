@@ -4,12 +4,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { actionCodeSettings } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../providers/user.service';
+import { User } from '../data/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  constructor(public afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
+  public isCurrentUserAdmin: boolean;
+
+  constructor(public afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService, public userService: UserService) {
+    this.isAdmin();
   }
 
   public async getUser(): Promise<firebase.User> {
@@ -40,10 +45,21 @@ export class AuthenticationService {
       console.log(err);
       this.toastr.error('Sign out failed');
     }
+    this.isAdmin();
   }
 
   public isSignedIn(url: string): boolean {
     this.getUser();
     return this.afAuth.auth.isSignInWithEmailLink(url);
+  }
+
+  public async isAdmin(): Promise<boolean> {
+    try {
+      const currentUser = await this.afAuth.user.toPromise();
+      this.isCurrentUserAdmin =  await this.userService.getSingleUserDetails(currentUser.uid).then((details: User) => details.isAdmin);
+      console.log('IS USER ADMIN', this.isCurrentUserAdmin);
+    } catch (err) {
+      return false;
+    }
   }
 }

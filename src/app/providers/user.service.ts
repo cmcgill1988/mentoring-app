@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable, Subscription } from 'rxjs';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'

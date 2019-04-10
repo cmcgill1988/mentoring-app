@@ -2,6 +2,7 @@ import { AuthService } from '../../providers/auth.service';
 import { AvatarComponent } from './../avatar/avatar.component';
 import { Component, OnInit } from '@angular/core';
 import { ToasterService } from 'angular2-toaster';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
   public authenticated: any;
   public currentUser: any;
   public isCollapsed: boolean = false;
-  constructor(public authService: AuthService, private toasterService: ToasterService) { }
+  constructor(public authService: AuthService, private toasterService: ToasterService, private router: Router) { }
 
   public ngOnInit(): void {
     this.authService.user$.subscribe((response) => {
@@ -29,6 +30,7 @@ export class NavbarComponent implements OnInit {
     try {
       await this.authService.logout();
       this.authenticated = false;
+      this.router.navigate(['home']);
       this.toasterService.pop('success', 'Success', 'Logout Successful');
     } catch (error) {
       console.error(error);

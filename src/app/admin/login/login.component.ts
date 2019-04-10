@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         await this.authService.login(this.signInForm.value as UserCredentials);
         this.toasterService.pop('success', 'Success', 'Login Successful');
         this.isLoggingIn = false;
-        this.router.navigate(['/home']);
+        this.router.navigate(['home']);
       } catch (error) {
         this.isLoggingIn = false;
         console.log(error);

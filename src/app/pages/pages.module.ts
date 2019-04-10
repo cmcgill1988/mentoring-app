@@ -10,12 +10,14 @@ import { SharedComponentModule } from '../shared-component/shared-component.modu
 import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MasonryPageComponent } from './masonry-page/masonry-page.component';
+import { AdminOnlyPageComponent } from './admin-only-page/admin-only-page.component';
 
 @NgModule({
   declarations: [
     HomePageComponent,
     SecurePageComponent,
     AboutPageComponent,
+    AdminOnlyPageComponent,
     BlogPageComponent,
     CanvasPageComponent,
     MasonryPageComponent,
