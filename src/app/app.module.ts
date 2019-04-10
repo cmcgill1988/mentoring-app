@@ -22,6 +22,7 @@ import { AuthService } from './providers/auth.service';
 import { LikesService } from './providers/likes.service';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterModule } from 'angular2-toaster';
+import { RouteGuardModule } from './route-guards/route-guard.module';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ToasterModule } from 'angular2-toaster';
     FormsModule,
     PagesModule,
     ReactiveFormsModule,
+    RouteGuardModule,
     SharedComponentModule,
     SharedDirectivesModule,
     ToasterModule,

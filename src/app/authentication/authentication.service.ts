@@ -9,14 +9,11 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  public user: any;
-
   constructor(public afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
-    this.getUser();
   }
 
-  private async getUser(): Promise<void> {
-    this.user = await this.afAuth.authState.toPromise();
+  public async getUser(): Promise<firebase.User> {
+    return await this.afAuth.authState.toPromise();
   }
 
   public async sendEmailLink(email: string): Promise<void> {
@@ -25,7 +22,6 @@ export class AuthenticationService {
         email,
         actionCodeSettings
       );
-      console.log('user', this.user);
       window.localStorage.setItem('emailForSignIn', email);
       this.toastr.success('You will receive a sign in link in an email, click it to sign in');
     } catch (err) {

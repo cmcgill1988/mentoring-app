@@ -8,12 +8,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SecurePageComponent } from './secure-page/secure-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
-
+import { AuthenticatedGuard } from '../route-guards/authenticated.guard';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: 'home', component: HomePageComponent, data: { animation: 'firstPage' } },
-  { path: 'secure-page', component: SecurePageComponent, data: { animation: 'securePage' } },
+  { path: 'secure-page', component: SecurePageComponent, data: { animation: 'securePage' }, canActivate: [AuthenticatedGuard] },
   { path: 'blog/:uid', component: BlogPageComponent, data: { animation: 'blogPage' } },
   { path: 'canvas', component: CanvasPageComponent, data: { animation: 'canvasPage' } },
   { path: 'masonry', component: MasonryPageComponent, data: { animation: 'masonryPage' } },
