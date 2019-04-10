@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit {
       await this.authService.logout();
       this.authenticated = false;
       this.router.navigate(['home']);
+      this.authService.isCurrentUserAdmin = false;
       this.toasterService.pop('success', 'Success', 'Logout Successful');
     } catch (error) {
       console.error(error);

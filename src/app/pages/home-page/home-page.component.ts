@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DbProvider } from 'src/app/core/db.service';
 import { Observable } from 'rxjs';
+import { UserService } from 'src/app/providers/user.service';
+import { AuthService } from 'src/app/providers/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,9 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class HomePageComponent implements OnInit {
   public messages$: Observable<any[]>;
-  constructor(private db: DbProvider) { }
+  public isAuthenticated: boolean;
+  constructor(private db: DbProvider, private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.loginStateChange$.subscribe((response) => this.isAuthenticated = response);
   }
 
   public saveDb() {

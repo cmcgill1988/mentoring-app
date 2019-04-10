@@ -2,9 +2,11 @@
   home-page works!
 </p>
 
-<button (click)="saveDb()">Save</button>
-<button (click)="getMessages()">Get</button>
-
-<ul>
-  <li *ngFor="let message of messages$ | async">{{message.message}}</li>
-</ul>
+<div *ngIf="isAuthenticated">
+  <button (click)="saveDb()">Save</button>
+  <button (click)="getMessages()">Get</button>
+  
+  <ul>
+    <li *ngFor="let message of messages$ | async">{{message.message}}</li>
+  </ul>
+</div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UserCredentials } from '../data/interfaces/usercredentials';
 import { UserService } from './user.service';
 import { User } from '../data/models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
     isCurrentUserAdmin: boolean;
     loginStateChange$: EventEmitter<any>;
 
-    constructor(public afireauth: AngularFireAuth, private userService: UserService) {
+    constructor(public afireauth: AngularFireAuth, private userService: UserService, private router: Router) {
         this.loginStateChange$ = new EventEmitter();
         this.user$ = this.afireauth.authState;
         this.user$.subscribe((response) => {
@@ -30,7 +31,9 @@ export class AuthService {
 
     public async logout(): Promise<void> {
       try {
+        this.router.navigate(['home']);
         await this.afireauth.auth.signOut();
+        this.isCurrentUserAdmin = false;
       } catch (error) {
         console.error(error);
       }
